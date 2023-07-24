@@ -1,0 +1,39 @@
+﻿<Properties StartupConfiguration="{5CA11FBD-246D-4DEF-A456-6104EEEC1FF3}|Default">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Controllers/FormController.cs">
+    <Files>
+      <File FileName="Program.cs" Line="79" Column="62" />
+      <File FileName="Models/Product.cs" Line="30" Column="57" />
+      <File FileName="Controllers/FormController.cs" Line="47" Column="10" />
+      <File FileName="Views/Form/Form.cshtml" Line="11" Column="71" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="WebApp" expanded="True">
+            <Node name="WebApp" expanded="True">
+              <Node name="Controllers" expanded="True">
+                <Node name="FormController.cs" selected="True" />
+              </Node>
+              <Node name="Models" expanded="True" />
+              <Node name="Pages" expanded="True">
+                <Node name="Shared" expanded="True" />
+              </Node>
+              <Node name="Validation" expanded="True" />
+              <Node name="Views" expanded="True">
+                <Node name="Form" expanded="True" />
+                <Node name="Shared" expanded="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.WebApp PreferredExecutionTarget="/Applications/Google Chrome.app" />
+</Properties>

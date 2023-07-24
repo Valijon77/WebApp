@@ -1,0 +1,67 @@
+﻿@page
+@model HandlerSelectorModel
+@using Microsoft.AspNetCore.Mvc.RazorPages
+@using Microsoft.EntityFrameworkCore
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="bg-primary text-white text-center m-2 p-2">Selector</div>
+    <div class="m-2">
+        <table class="table table-sm table-striped table-bordered">
+            <tbody>
+                <tr><th>Name</th><td>@Model.Product_?.Name</td></tr>
+                <tr><th>Price</th><td>@Model.Product_?.Price</td></tr>
+                <tr><th>Category</th><td>@Model.Product_?.Category?.Name</td></tr>
+                <tr><th>Supplier</th><td>@Model.Product_?.Supplier?.Name</td></tr>
+            </tbody>
+        </table>
+        <a class="btn btn-primary" href="/handlerselector">Standard</a>
+        <a class="btn btn-primary" href="/handlerselector?handler=related">Related</a>
+    </div>
+</body>
+</html>
+
+@functions
+{
+    public class HandlerSelectorModel : PageModel
+    {
+        private DataContext context;
+
+        public Product? Product_ { get; set; }
+
+        public HandlerSelectorModel(DataContext ctx)
+        {
+            context = ctx;
+        }
+
+        public async Task OnGetAsync(long id = 1)
+        {
+            Product_ = await context.Products.FindAsync(id);
+        }
+
+        public async Task OnGetRelatedAsync(long id = 1)
+        {
+            Product_ = await context.Products
+                .Include(p => p.Category)
+                .Include(p => p.Supplier)
+                .FirstOrDefaultAsync(p => p.ProductId == id);
+
+            if(Product_!=null && Product_.Supplier != null)
+            {
+                Product_.Supplier.Products = null;
+            }
+
+            if(Product_!=null && Product_.Category != null)
+            {
+                Product_.Category.Products = null;
+            }
+
+
+
+        }
+    }
+}
