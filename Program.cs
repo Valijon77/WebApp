@@ -1,12 +1,13 @@
 using WebApp.Models;
 using Microsoft.EntityFrameworkCore;
+using WebApp.Filters;
 using Microsoft.AspNetCore.Mvc;
 //using Microsoft.OpenApi.Models;
 //using System.Text.Json.Serialization;
 //using Microsoft.AspNetCore.Mvc.RazorPages;
 //using Microsoft.AspNetCore.Razor.TagHelpers;
 //using WebApp.TagHelpers;
-using Microsoft.AspNetCore.Antiforgery;
+//using Microsoft.AspNetCore.Antiforgery;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -53,43 +54,51 @@ builder.Services.AddRazorPages();
 //    opts.ReturnHttpNotAcceptable = true;
 //});
 
-builder.Services.AddSingleton<CitiesData>();
+//builder.Services.AddSingleton<CitiesData>();
 //builder.Services.AddTransient<ITagHelperComponent, TimeTagHelperComponent>();
 //builder.Services.AddTransient<ITagHelperComponent, TableFooterTagHelperComponent>();
 
-builder.Services.Configure<AntiforgeryOptions>(opts =>
-{
-    opts.HeaderName = "X-XSRF-TOKEN";
-});
+//builder.Services.Configure<AntiforgeryOptions>(opts =>
+//{
+//    opts.HeaderName = "X-XSRF-TOKEN";
+//});
 
+//builder.Services.Configure<MvcOptions>(opts =>
+//{
+//    opts.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(value => "Please enter a value!!!");
+//});
+
+builder.Services.AddScoped<GuidResponseAttribute>();
 builder.Services.Configure<MvcOptions>(opts =>
 {
-    opts.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(value => "Please enter a value!!!");
+    opts.Filters.Add<HttpsOnlyAttribute>();
+    opts.Filters.Add(new MessageAttribute("This is the globally-scoped filter."));
+
 });
 
 var app = builder.Build();
 
 app.UseStaticFiles();
 
-IAntiforgery antiforgery = app.Services.GetRequiredService<IAntiforgery>();
-app.Use(async (context, next) =>
-{
-    if (!context.Request.Path.StartsWithSegments("/api"))
-    {
-        string? token = antiforgery.GetAndStoreTokens(context).RequestToken;
-        if (token != null)
-        {
-            context.Response.Cookies.Append("XSRF-TOKEN", token, new CookieOptions { HttpOnly = false });
-        }
-    }
-    await next();
-});
+//IAntiforgery antiforgery = app.Services.GetRequiredService<IAntiforgery>();
+//app.Use(async (context, next) =>
+//{
+//    if (!context.Request.Path.StartsWithSegments("/api"))
+//    {
+//        string? token = antiforgery.GetAndStoreTokens(context).RequestToken;
+//        if (token != null)
+//        {
+//            context.Response.Cookies.Append("XSRF-TOKEN", token, new CookieOptions { HttpOnly = false });
+//        }
+//    }
+//    await next();
+//});
 
 //app.UseSession();
 //app.MapControllers();
 //app.MapControllerRoute("Default", "{controller=Home}/{action=Index}/{id?}");
-//app.MapDefaultControllerRoute();
-app.MapControllerRoute("forms", "controllers/{controller=Home}/{action=Index}/{id?}");
+app.MapDefaultControllerRoute();
+//app.MapControllerRoute("forms", "controllers/{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
 
 //const string BASE_URL = "api/products";

@@ -10,7 +10,7 @@
   "profiles": {
     "WebApp": {
       "commandName": "Project",
-      "applicationUrl": "http://localhost:5000",
+      "applicationUrl": "http://localhost:5000;https://localhost:44350",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

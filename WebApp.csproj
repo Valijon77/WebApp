@@ -8,46 +8,32 @@
 
   <ItemGroup>
     <None Remove="Models\" />
-    <None Remove="Controllers\" />
     <None Remove="Views\" />
     <None Remove="Views\Home\" />
     <None Remove="Views\Shared\" />
     <None Remove="Pages\" />
-    <None Remove="Pages\Suppliers\" />
     <None Remove="Pages\Shared\" />
     <None Remove="Components\" />
-    <None Remove="Views\Shared\Components\" />
-    <None Remove="Views\Shared\Components\CitySummary\" />
-    <None Remove="Views\Shared\Components\PageSize\" />
-    <None Remove="Pages\Shared\Components\" />
-    <None Remove="Pages\Shared\Components\CitiesPageHybrid\" />
-    <None Remove="Views\Cities\" />
-    <None Remove="Views\Shared\Components\CitiesControllerHybrid\" />
     <None Remove="TagHelpers\" />
-    <None Remove="Views\Form\" />
     <None Remove="Validation\" />
+    <None Remove="Controllers\" />
+    <None Remove="Filters\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
-    <Folder Include="Controllers\" />
     <Folder Include="Views\" />
     <Folder Include="Views\Home\" />
     <Folder Include="Views\Shared\" />
     <Folder Include="Pages\" />
-    <Folder Include="Pages\Suppliers\" />
     <Folder Include="Pages\Shared\" />
     <Folder Include="Components\" />
-    <Folder Include="Views\Shared\Components\" />
-    <Folder Include="Views\Shared\Components\CitySummary\" />
-    <Folder Include="Views\Shared\Components\PageSize\" />
-    <Folder Include="Pages\Shared\Components\" />
-    <Folder Include="Pages\Shared\Components\CitiesPageHybrid\" />
-    <Folder Include="Views\Cities\" />
-    <Folder Include="Views\Shared\Components\CitiesControllerHybrid\" />
     <Folder Include="TagHelpers\" />
     <Folder Include="wwwroot\images\" />
-    <Folder Include="Views\Form\" />
     <Folder Include="Validation\" />
+    <Folder Include="Views\Shared\Components\" />
+    <Folder Include="Views\Shared\Components\" />
+    <Folder Include="Controllers\" />
+    <Folder Include="Filters\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.0" />

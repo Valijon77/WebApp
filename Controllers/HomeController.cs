@@ -1,48 +1,57 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using WebApp.Models;
+using Microsoft.AspNetCore.Mvc.Filters;
+using WebApp.Filters;
 
 namespace WebApp.Controllers;
 
-
+//[HttpsOnly]
+//[ResultDiagnostics]
+//[GuidResponse]
+//[GuidResponse]
+[Message("This is the controller-scoped filer.")]
 public class HomeController : Controller
 {
-	private readonly DataContext context;
-
-	public HomeController(DataContext ctx)
+	[Message("This is the first action-scoped filter.")]
+	[Message("This is the second action-scoped filter.")]
+	public IActionResult Index()
 	{
-		context = ctx;
-	}
+        return View("Message", "This is the Index action on the Home controller");
+    }
 
-	public async Task<IActionResult> Index(long id = 1)
-	{
-		ViewBag.AveragePrice = await context.Products.AverageAsync(p => p.Price);
-
-		return View(await context.Products.FindAsync(id));
-		//Product? prod = await context.Products.FindAsync(id);
-		//if (prod?.CategoryId == 1)
-		//{
-		//	return View("Watersports", prod);
-		//}
-		//else
-		//{
-		//	return View(prod);
-		//}
-	}
-
-	//public IActionResult Common()
+	//public IActionResult Secure()
 	//{
-	//	return View();
+	//	return View("Message", "This is the Secure action on the Home controller");
 	//}
 
-	public IActionResult List()
-	{
-		return View(context.Products);
-	}
+	////[ChangeArg]
+	//public IActionResult Messages(string message1, string message2 = "None")
+	//{
+	//	return View("Message", $"{message1}, {message2}");
+	//}
 
-	public IActionResult Html()
-	{
-		return View((object)"This is a <i><h3>string</h3></i>");
-	}
+	//public override void OnActionExecuting(ActionExecutingContext context)
+	//{
+	//	if (context.ActionArguments.ContainsKey("message1"))
+	//	{
+	//		context.ActionArguments["message1"] = "New message";
+	//	}
+	//}
+
+	//[RangeException]
+	//public ViewResult GenerateException(int? id)
+	//{
+	//	if (id == null)
+	//	{
+	//		throw new ArgumentNullException(nameof(id));
+	//	}
+	//	else if (id > 10)
+	//	{
+	//		throw new ArgumentOutOfRangeException(nameof(id));
+	//	}
+	//	else
+	//	{
+	//		return View("Message", $"The value is {id}");
+	//	}
+	//}
 }
 
