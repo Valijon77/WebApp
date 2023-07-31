@@ -1,36 +1,37 @@
 ﻿<Properties StartupConfiguration="{5CA11FBD-246D-4DEF-A456-6104EEEC1FF3}|Default">
-  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.WebApp PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Controllers/HomeController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Pages/Edit.cshtml">
     <Files>
-      <File FileName="Program.cs" />
-      <File FileName="Models/Product.cs" />
-      <File FileName="Controllers/HomeController.cs" Line="40" Column="1" />
-      <File FileName="Views/Shared/Message.cshtml" />
-      <File FileName="Pages/Message.cshtml" />
-      <File FileName="Properties/launchSettings.json" />
-      <File FileName="Filters/HttpsOnlyAttribute.cs" />
-      <File FileName="Filters/SimpleCacheAttribute.cs" />
-      <File FileName="Filters/ChangeArgAttribute.cs" />
-      <File FileName="Filters/ChangePageArgs.cs" />
-      <File FileName="Filters/ResultDiagnosticsAttribute.cs" />
-      <File FileName="Filters/RangeExceptionAttribute.cs" />
+      <File FileName="Program.cs" Line="156" Column="1" />
+      <File FileName="Models/Product.cs" Line="15" Column="49" />
+      <File FileName="Controllers/HomeController.cs" Line="94" Column="21" />
+      <File FileName="Models/ViewModelFactory.cs" Line="54" Column="9" />
+      <File FileName="Views/Home/Index.cshtml" Line="19" Column="33" />
+      <File FileName="Views/Home/ProductEditor.cshtml" Line="45" Column="33" />
+      <File FileName="Models/ProductViewModel.cs" Line="8" Column="27" />
+      <File FileName="Pages/Index.cshtml" Line="25" Column="42" />
+      <File FileName="Pages/_ProductEditor.cshtml" Line="68" Column="19" />
+      <File FileName="Pages/EditorPageModel.cs" Line="17" Column="40" />
+      <File FileName="Pages/Details.cshtml" Line="5" Column="63" />
+      <File FileName="Pages/Create.cshtml" Line="20" Column="75" />
+      <File FileName="Pages/Edit.cshtml" Line="22" Column="90" />
+      <File FileName="Pages/SupplierBreakOut.cshtml" Line="26" Column="7" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="WebApp">
             <Node name="WebApp">
-              <Node name="Controllers" expanded="True">
-                <Node name="HomeController.cs" selected="True" />
-              </Node>
+              <Node name="Controllers" expanded="True" />
               <Node name="Filters" expanded="True" />
               <Node name="Models" expanded="True" />
-              <Node name="Pages" expanded="True">
+              <Node name="Pages">
                 <Node name="Shared" expanded="True" />
+                <Node name="Edit.cshtml" selected="True" />
               </Node>
               <Node name="Properties" expanded="True" />
+              <Node name="Validation" expanded="True" />
               <Node name="Views" expanded="True">
                 <Node name="Home" expanded="True" />
                 <Node name="Shared" expanded="True" />
@@ -41,7 +42,8 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.WebApp PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

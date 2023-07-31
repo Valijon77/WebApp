@@ -1,57 +1,107 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
-using WebApp.Filters;
+using WebApp.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebApp.Controllers;
 
-//[HttpsOnly]
-//[ResultDiagnostics]
-//[GuidResponse]
-//[GuidResponse]
-[Message("This is the controller-scoped filer.")]
+[AutoValidateAntiforgeryToken]
 public class HomeController : Controller
 {
-	[Message("This is the first action-scoped filter.")]
-	[Message("This is the second action-scoped filter.")]
+	private DataContext context;
+	private readonly ILogger _logger;
+
+	private IEnumerable<Category> Categories => context.Categories;
+	private IEnumerable<Supplier> Suppliers => context.Suppliers;
+
+	public HomeController(DataContext data, ILogger<HomeController> logger)
+	{
+		context = data;
+		_logger = logger;
+	}
+
 	public IActionResult Index()
 	{
-        return View("Message", "This is the Index action on the Home controller");
+		return View(context.Products.Include(p => p.Category).Include(p => p.Supplier));
     }
 
-	//public IActionResult Secure()
-	//{
-	//	return View("Message", "This is the Secure action on the Home controller");
-	//}
+	public async Task<IActionResult> Details(long id)
+	{
+		Product? p = await context.Products.Include(p => p.Category).Include(p => p.Supplier)
+			.FirstOrDefaultAsync(p => p.ProductId == id) ?? new Product();
 
-	////[ChangeArg]
-	//public IActionResult Messages(string message1, string message2 = "None")
-	//{
-	//	return View("Message", $"{message1}, {message2}");
-	//}
+		ProductViewModel model = ViewModelFactory.Details(p);
+		return View("ProductEditor", model);
 
-	//public override void OnActionExecuting(ActionExecutingContext context)
-	//{
-	//	if (context.ActionArguments.ContainsKey("message1"))
-	//	{
-	//		context.ActionArguments["message1"] = "New message";
-	//	}
-	//}
+	}
 
-	//[RangeException]
-	//public ViewResult GenerateException(int? id)
-	//{
-	//	if (id == null)
-	//	{
-	//		throw new ArgumentNullException(nameof(id));
-	//	}
-	//	else if (id > 10)
-	//	{
-	//		throw new ArgumentOutOfRangeException(nameof(id));
-	//	}
-	//	else
-	//	{
-	//		return View("Message", $"The value is {id}");
-	//	}
-	//}
+	public IActionResult Create()
+	{
+		return View("ProductEditor", ViewModelFactory.Create(new Product(), Categories, Suppliers));
+	}
+
+	[HttpPost]
+	public async Task<IActionResult> Create([FromForm] Product product)
+	{
+		_logger.LogInformation($"Product Information:\n{product.ProductId}\n{product.Name}\n{product.Price}\n{product.Category}\n{product.Supplier}");
+		_logger.LogInformation("Before checking Model Validation.");
+		if (ModelState.IsValid)
+		{
+			_logger.LogInformation("Inside the Model Validation.");
+			product.ProductId = default;
+			product.Category = default;
+			product.Supplier = default;
+			context.Products.Add(product);
+			await context.SaveChangesAsync();
+			return RedirectToAction(nameof(Index));
+		}
+		_logger.LogInformation("After checking Model Validation.");
+		return View("ProductEditor", ViewModelFactory.Create(product, Categories, Suppliers));
+	}
+
+	public async Task<IActionResult> Edit(long id)
+	{
+		Product? p = await context.Products.FindAsync(id);
+		if (p != null)
+		{
+			ProductViewModel model = ViewModelFactory.Edit(p, Categories, Suppliers);
+			return View("ProductEditor", model);
+		}
+		return NotFound();
+	}
+
+	[HttpPost]
+	public async Task<IActionResult> Edit([FromForm] Product product)
+	{
+		if (ModelState.IsValid)
+		{
+			product.Category = default;
+			product.Supplier = default;
+			context.Products.Update(product);
+			await context.SaveChangesAsync();
+			return RedirectToAction(nameof(Index));
+		}
+		return View("ProductEditor", ViewModelFactory.Edit(product, Categories, Suppliers));
+	}
+
+	public async Task<IActionResult> Delete(long id)
+	{
+		Product? p = await context.Products.Include(p => p.Category).Include(p => p.Supplier).FirstOrDefaultAsync(p => p.ProductId == id);
+		if (p != null)
+		{
+			ProductViewModel model = ViewModelFactory.Delete(p);
+			return View("ProductEditor", model);
+		}
+		return NotFound();
+	}
+
+	[HttpPost]
+	public async Task<IActionResult> Delete([FromForm] Product product)
+	{
+		context.Products.Remove(product);
+		await context.SaveChangesAsync();
+		return RedirectToAction(nameof(Index));
+	}
+
+
 }
 

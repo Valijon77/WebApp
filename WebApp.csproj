@@ -31,7 +31,6 @@
     <Folder Include="wwwroot\images\" />
     <Folder Include="Validation\" />
     <Folder Include="Views\Shared\Components\" />
-    <Folder Include="Views\Shared\Components\" />
     <Folder Include="Controllers\" />
     <Folder Include="Filters\" />
   </ItemGroup>

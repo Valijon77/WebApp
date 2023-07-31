@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApp.Models;
 
-[PhraseAndPrice(Phrase ="Small",Price ="100")]
+//[PhraseAndPrice(Phrase ="Small",Price ="100")]
 public class Product
 {
     public long ProductId { get; set; }
@@ -22,13 +22,13 @@ public class Product
     public decimal Price { get; set; }
 
     [PrimaryKey(ContextType =typeof(DataContext), DataType =typeof(Category))]
-    [Remote("CategoryKey", "Validation", ErrorMessage ="Enter an existing keyya")]
+    //[Remote("CategoryKey", "Validation", ErrorMessage ="Enter an existing keyya")]
     public long CategoryId { get; set; }
 
     public Category? Category { get; set; }
 
     [PrimaryKey(ContextType =typeof(DataContext), DataType =typeof(Supplier))]
-    [Remote("SupplierKey", "Validation", ErrorMessage ="Enter an existing keyyaaa")]
+    //[Remote("SupplierKey", "Validation", ErrorMessage ="Enter an existing keyyaaa")]
     public long SupplierId { get; set; }
 
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]

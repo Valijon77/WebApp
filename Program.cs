@@ -1,7 +1,7 @@
 using WebApp.Models;
 using Microsoft.EntityFrameworkCore;
 using WebApp.Filters;
-using Microsoft.AspNetCore.Mvc;
+//using Microsoft.AspNetCore.Mvc;
 //using Microsoft.OpenApi.Models;
 //using System.Text.Json.Serialization;
 //using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -69,12 +69,11 @@ builder.Services.AddRazorPages();
 //});
 
 builder.Services.AddScoped<GuidResponseAttribute>();
-builder.Services.Configure<MvcOptions>(opts =>
-{
-    opts.Filters.Add<HttpsOnlyAttribute>();
-    opts.Filters.Add(new MessageAttribute("This is the globally-scoped filter."));
-
-});
+//builder.Services.Configure<MvcOptions>(opts =>
+//{
+//    opts.Filters.Add<HttpsOnlyAttribute>();
+//    opts.Filters.Add(new MessageAttribute("This is the globally-scoped filter."));
+//});
 
 var app = builder.Build();
 
@@ -98,7 +97,7 @@ app.UseStaticFiles();
 //app.MapControllers();
 //app.MapControllerRoute("Default", "{controller=Home}/{action=Index}/{id?}");
 app.MapDefaultControllerRoute();
-//app.MapControllerRoute("forms", "controllers/{controller=Home}/{action=Index}/{id?}");
+app.MapControllerRoute("forms", "controllers/{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
 
 //const string BASE_URL = "api/products";
